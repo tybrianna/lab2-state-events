@@ -1,12 +1,19 @@
+import { StatsDisplayProps } from "./StatsDisplay";
 
+const StatsDisplay = ({
+  stats,
+  showReadingTime = true,
+}: StatsDisplayProps) => {
+  return (
+    <div>
+      <p>Characters: {stats.characterCount}</p>
+      <p>Words: {stats.wordCount}</p>
 
-export interface TextStats {
-  characterCount: number;
-  wordCount: number;
-  readingTime: number; // in minutes
-}
- 
-export interface StatsDisplayProps {
-  stats: TextStats;
-  showReadingTime?: boolean;
-}
+      {showReadingTime && (
+        <p>Reading Time: {stats.readingTime} min</p>
+      )}
+    </div>
+  );
+};
+
+export default StatsDisplay;
