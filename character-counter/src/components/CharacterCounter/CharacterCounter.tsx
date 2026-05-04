@@ -1,7 +1,10 @@
-import { CharacterCounterProps } from "./CharacterCounter";
+import "./styles.css";
 
-interface Props extends CharacterCounterProps {
+interface Props {
   wordCount: number;
+  minWords?: number;
+  maxWords?: number;
+  targetReadingTime?: number;
 }
 
 const CharacterCounter = ({
@@ -10,24 +13,37 @@ const CharacterCounter = ({
   targetReadingTime,
   wordCount,
 }: Props) => {
-  const isBelowMin = wordCount < minWords;
-  const isAboveMax = wordCount > maxWords;
+  const progress = Math.min((wordCount / maxWords) * 100, 100);
+
+  const getColorClass = () => {
+    if (wordCount < minWords) return "text-orange";
+    if (wordCount > maxWords) return "text-red";
+    return "text-green";
+  };
+
+  const getBarColor = () => {
+    if (wordCount < minWords) return "orange";
+    if (wordCount > maxWords) return "red";
+    return "green";
+  };
 
   return (
-    <div>
-      <p>Words: {wordCount}</p>
+    <div className="counter-container">
+      <p>Word Count: {wordCount}</p>
 
-      {minWords > 0 && (
-        <p style={{ color: isBelowMin ? "red" : "green" }}>
-          Min Words: {minWords}
-        </p>
-      )}
+      <div className="progress-bar">
+        <div
+          className="progress-fill"
+          style={{
+            width: `${progress}%`,
+            background: getBarColor(),
+          }}
+        />
+      </div>
 
-      {maxWords && (
-        <p style={{ color: isAboveMax ? "red" : "green" }}>
-          Max Words: {maxWords}
-        </p>
-      )}
+      <p className={getColorClass()}>
+        Goal: {minWords} - {maxWords} words
+      </p>
 
       {targetReadingTime && (
         <p>Target Reading Time: {targetReadingTime} min</p>
