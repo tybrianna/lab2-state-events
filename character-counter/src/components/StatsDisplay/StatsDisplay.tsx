@@ -1,5 +1,14 @@
 import "./styles.css";
 
+interface StatsDisplayProps {
+  stats: {
+    characterCount: number;
+    wordCount: number;
+    readingTime: number;
+  };
+  showReadingTime?: boolean;
+}
+
 const StatsDisplay = ({ stats, showReadingTime = true }: StatsDisplayProps) => {
   return (
     <div className="stats-container">
