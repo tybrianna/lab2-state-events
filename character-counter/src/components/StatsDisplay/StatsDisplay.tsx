@@ -1,16 +1,20 @@
-import { StatsDisplayProps } from "./StatsDisplay";
+import "./styles.css";
 
-const StatsDisplay = ({
-  stats,
-  showReadingTime = true,
-}: StatsDisplayProps) => {
+const StatsDisplay = ({ stats, showReadingTime = true }: StatsDisplayProps) => {
   return (
-    <div>
-      <p>Characters: {stats.characterCount}</p>
-      <p>Words: {stats.wordCount}</p>
+    <div className="stats-container">
+      <div>
+        <strong>Characters:</strong> {stats.characterCount}
+      </div>
+
+      <div>
+        <strong>Words:</strong> {stats.wordCount}
+      </div>
 
       {showReadingTime && (
-        <p>Reading Time: {stats.readingTime} min</p>
+        <div>
+          <strong>Reading Time:</strong> {stats.readingTime} min
+        </div>
       )}
     </div>
   );

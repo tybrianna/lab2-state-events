@@ -1,25 +1,27 @@
-import { useState } from "react";
-import { TextInputProps } from "./TextInput";
+import { useState, useEffect } from "react";
+import "./styles.css";
 
 const TextInput = ({
   onTextChange,
   placeholder = "Start typing...",
   initialValue = "",
-}: TextInputProps) => {
+} : {
+  onTextChange: (text: string) => void;
+  placeholder?: string;
+  initialValue?: string;
+}) => {
   const [text, setText] = useState(initialValue);
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = e.target.value;
-    setText(newText);
-    onTextChange(newText);
-  };
+  useEffect(() => {
+    onTextChange(text);
+  }, [text]);
 
   return (
     <textarea
+      className="textarea"
       value={text}
-      onChange={handleChange}
+      onChange={(e) => setText(e.target.value)}
       placeholder={placeholder}
-      style={{ width: "100%", minHeight: "120px", padding: "10px" }}
     />
   );
 };
