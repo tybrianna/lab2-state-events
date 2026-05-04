@@ -1,4 +1,5 @@
-// types/index.ts
+
+
 export interface TextStats {
   characterCount: number;
   wordCount: number;
